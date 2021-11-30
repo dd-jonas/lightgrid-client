@@ -1,5 +1,6 @@
 {
   "name": "2244-server",
+  "type": "module",
   "version": "1.0.0",
   "dependencies": {
     "dotenv": "^10.0.0",

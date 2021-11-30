@@ -1,0 +1,39 @@
+@baseUrl = http://192.168.43.148:80/api/F1AB34A49D
+
+### Get API key (open gateway in Phoscon app settings first)
+POST {{baseUrl}}
+content-type: application/json
+
+{
+    "devicetype": "my application"
+}
+
+### Get all connected lights
+GET {{baseUrl}}/lights
+
+### Get single connected light by id
+GET {{baseUrl}}/lights/2
+
+### Control a single light
+PUT {{baseUrl}}/lights/2/state
+content-type: application/json
+
+{
+    "on": true,
+    "bri": 255
+}
+
+### Get all groups
+GET {{baseUrl}}/groups
+
+### Get a single group
+GET {{baseUrl}}/groups/room
+
+### Control a group of lights
+PUT {{baseUrl}}/groups/room/action
+content-type: application/json
+
+{
+    "on": true,
+    "bri": 255
+}
