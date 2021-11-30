@@ -1,0 +1,11 @@
+{
+  "name": "2244-server",
+  "version": "1.0.0",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "osc": "2.4.1"
+  },
+  "scripts": {
+    "dev": "node index.js"
+  }
+}
