@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { baseUrl } from './const.js';
+
+import { baseUrl } from '../constants/index.js';
 
 class Group {
   constructor(name) {
@@ -10,10 +11,12 @@ class Group {
     try {
       await axios.put(`${baseUrl}/groups/${this.name}/action`, {
         on: true,
-        bri: 255
+        bri: 255,
       });
     } catch (error) {
       console.error(error);
     }
   }
 }
+
+export default Group;
