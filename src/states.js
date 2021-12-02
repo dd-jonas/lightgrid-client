@@ -28,10 +28,10 @@ const paths = {
 };
 
 const states = {
-  0: async () => await group.off(),
-  1: async () => await group.on(),
-  10: async () => ghost.walk(paths.jane),
-  11: async () => ghost.walk(paths.mary),
+  0: () => group.off(),
+  1: () => group.on(),
+  10: () => ghost.walk(paths.jane),
+  11: () => ghost.walk(paths.mary),
 };
 
 export default states;

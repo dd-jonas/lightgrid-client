@@ -7,23 +7,17 @@ class Group {
     this.name = name;
   }
 
-  async on() {
-    try {
-      await axios.put(`${baseUrl}/groups/${this.name}/action`, {
-        on: true,
-        bri: 255,
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  on() {
+    return this.updateState({ on: true, bri: 255 });
   }
 
-  async off() {
+  off() {
+    return this.updateState({ on: false, bri: 0 });
+  }
+
+  async updateState(state) {
     try {
-      await axios.put(`${baseUrl}/groups/${this.name}/action`, {
-        on: false,
-        bri: 0,
-      });
+      await axios.put(`${baseUrl}/groups/${this.name}/action`, state);
     } catch (error) {
       console.error(error);
     }
