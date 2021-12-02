@@ -17,6 +17,17 @@ class Group {
       console.error(error);
     }
   }
+
+  async off() {
+    try {
+      await axios.put(`${baseUrl}/groups/${this.name}/action`, {
+        on: false,
+        bri: 0,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
 
 export default Group;

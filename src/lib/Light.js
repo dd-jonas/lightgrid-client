@@ -16,7 +16,7 @@ class Light {
   async setBrightness(brightness) {
     if (brightness === this.brightness) return;
 
-    this.bri = brightness;
+    this.brightness = brightness;
 
     try {
       await axios.put(
