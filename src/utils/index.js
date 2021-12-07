@@ -24,32 +24,30 @@ export const lerp = (t, ...p) => {
   switch (p.length) {
     // Linear
     case 2:
-      return {
-        x: (1 - t) * p[0].x + t * p[1].x,
-        y: (1 - t) * p[0].y + t * p[1].y,
-      };
+      return [
+        (1 - t) * p[0][0] + t * p[1][0],
+        (1 - t) * p[0][1] + t * p[1][1],
+      ];
 
     // Quadratic
     case 3:
-      return {
-        x: (1 - t) ** 2 * p[0].x + 2 * t * (1 - t) * p[1].x + t ** 2 * p[2].x,
-        y: (1 - t) ** 2 * p[0].y + 2 * t * (1 - t) * p[1].y + t ** 2 * p[2].y,
-      };
+      return [
+        (1 - t) ** 2 * p[0][0] + 2 * t * (1 - t) * p[1][0] + t ** 2 * p[2][0],
+        (1 - t) ** 2 * p[0][1] + 2 * t * (1 - t) * p[1][1] + t ** 2 * p[2][1],
+      ];
 
     // Cubic
     case 4:
-      return {
-        x:
-          (1 - t) ** 3 * p[0].x +
-          3 * t * (1 - t) ** 2 * p[1].x +
-          3 * t ** 2 * (1 - t) * p[2].x +
-          t ** 3 * p[3].x,
-        y:
-          (1 - t) ** 3 * p[0].y +
-          3 * t * (1 - t) ** 2 * p[1].y +
-          3 * t ** 2 * (1 - t) * p[2].y +
-          t ** 3 * p[3].y,
-      };
+      return [
+        (1 - t) ** 3 * p[0][0] +
+        3 * t * (1 - t) ** 2 * p[1][0] +
+        3 * t ** 2 * (1 - t) * p[2][0] +
+        t ** 3 * p[3][0],
+        (1 - t) ** 3 * p[0][1] +
+        3 * t * (1 - t) ** 2 * p[1][1] +
+        3 * t ** 2 * (1 - t) * p[2][1] +
+        t ** 3 * p[3][1],
+      ];
   }
 };
 
@@ -81,7 +79,7 @@ export const bezierToPoints = (path, steps) => {
   }, []);
 
   // Lerp each subpath and join
-  subPaths.flatMap((group) =>
+  return subPaths.flatMap((group) =>
     [...new Array(steps - 1)].map((_, j) => lerp((j + 1) / steps, ...group))
   );
 };

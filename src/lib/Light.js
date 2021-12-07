@@ -21,7 +21,9 @@ class Light {
     try {
       await axios.put(
         `${baseUrl}/lights/${this.id}/state`,
-        brightness === 0 ? { on: false, bri: 0 } : { on: true, bri: brightness }
+        brightness === 0
+          ? { on: false, bri: 0, }
+          : { on: true, bri: brightness, }
       );
     } catch (error) {
       console.error(error);
@@ -29,8 +31,8 @@ class Light {
   }
 
   static calculateBrightness(distance, options) {
-    const falloff = min(options.falloff, 0) ?? 75;
-    const maxBrightness = clamp(0, options.maxBrightness, 255) ?? 255;
+    const falloff = max(options?.falloff ?? 75, 0);
+    const maxBrightness = clamp(0, options?.maxBrightness ?? 255, 255);
 
     return max(-(maxBrightness / falloff) * distance + maxBrightness, 0);
   }

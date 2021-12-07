@@ -3,7 +3,7 @@ dotenv.config();
 
 import osc from 'osc';
 
-import states from './src/states.js';
+import states from './states.js';
 
 var udpPort = new osc.UDPPort({
   localAddress: process.env.LOCAL_ADDRESS,
@@ -31,11 +31,10 @@ const calculateResponse = async ({ value }) => {
   const action = states[value];
 
   if (!action) {
-    console.error('Received wrong state.');
+    return console.error('Received wrong state.');
   }
 
-  await action();
-  sendMessage(value);
+  await action(sendMessage);
 };
 
 // Listen for incoming messages from server.
@@ -47,6 +46,7 @@ udpPort.on('message', function ({ args } = oscMsg, info) {
 
 // after startup send ready
 udpPort.on('ready', function () {
+  states[1](sendMessage);
   sendMessage(1);
 });
 

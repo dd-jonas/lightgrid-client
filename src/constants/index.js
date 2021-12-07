@@ -1,6 +1,9 @@
-const baseUrl = 'http://192.168.43.148:80/api/F1AB34A49D';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const ghostWalkSpeed = 10; // Steps per second
+const baseUrl = `http://${process.env.LOCAL_ADDRESS}:80/api/F1AB34A49D`;
+
+const ghostWalkSpeed = 50; // Steps per second
 
 const lightsData = [
   {
@@ -15,8 +18,4 @@ const lightsData = [
   },
 ];
 
-const groupData = {
-  name: 'room',
-};
-
-export { baseUrl, ghostWalkSpeed, groupData, lightsData };
+export { baseUrl, ghostWalkSpeed, lightsData };

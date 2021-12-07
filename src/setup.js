@@ -1,9 +1,9 @@
-import { groupData, lightsData } from './constants/index.js';
+import { lightsData } from './constants/index.js';
 import { Ghost, Group, Light } from './lib/index.js';
 import { distance } from './utils/index.js';
 
 const ghost = new Ghost();
-const group = new Group(groupData.name);
+const group = new Group(1);
 const lights = lightsData.map(({ id, name, pos }) => new Light(id, name, pos));
 
 lights.forEach((light) => {
