@@ -4,35 +4,26 @@ import { sleep } from './utils/index.js';
 const paths = {
   jane: [
     [0, 10],
-    [20, 30],
-    [40, 50],
-    [60, 70],
-    [80, 90],
-    [100, 110],
-    [120, 130],
-    [140, 150],
-    [160, 170],
-    [200, 180],
-    [260, 190],
-    [350, 210],
-    [380, 170],
-    [420, 130],
-    [450, 110],
-    [470, 100],
-    [500, 90],
-    [520, 80],
-    [560, 80],
+    [33, 10],
+    [66, 30],
+    [99, 80],
+    [132, 160],
+    [165, 200],
+    [198, 240],
+    [231, 260],
+    [270, 300],
   ],
+
   mary: [
-    [300, 290],
-    [280, 270],
-    [260, 250],
-    [240, 230],
-    [220, 210],
-    [200, 190],
-    [180, 170],
-    [160, 150],
-    [140, 130],
+    [280, 290],
+    [200, 270],
+    [180, 250],
+    [150, 230],
+    [130, 210],
+    [110, 190],
+    [60, 170],
+    [30, 150],
+    [10, 130],
   ],
 };
 
@@ -41,22 +32,39 @@ const states = {
     await group.off();
     res(0);
   },
+
   1: async (res) => {
     await group.on();
     res(1);
   },
+
   10: async (res) => {
     res(10);
+    await sleep(100);
     await group.off(); 
     await ghost.walk(paths.jane);
-    await group.off();
-    res(0);
+    // await group.off();
+    // res(0);
   },
+
   11: async (res) => {
     res(11);
+    await sleep(100);
     await group.off();
     await ghost.walk(paths.mary);
-    await group.off();
+    // await group.off();
+    // res(0);
+  },
+
+  20: async (res) => {
+    res(20);
+    await group.on();
+    for (let i = 0; i < 3; i++) {
+      await group.off();
+      await sleep(200);
+      await group.on();
+    }
+    
     res(0);
   }
 };

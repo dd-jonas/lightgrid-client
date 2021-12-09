@@ -8,7 +8,7 @@ class Group {
   }
 
   on() {
-    return this.updateState({ on: true, bri: 255 });
+    return this.updateState({ on: true, bri: 100 });
   }
 
   off() {

@@ -14,7 +14,7 @@ class Ghost {
     this.interactables.forEach((interaction) => interaction(pos));
   }
 
-  async walk(path, steps = 10) {
+  async walk(path, steps = 9) {
     const points = bezierToPoints(path, steps);
 
     for (const point of points) {
