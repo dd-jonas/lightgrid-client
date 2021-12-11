@@ -41,7 +41,7 @@ const states = {
   10: async (res) => {
     res(10);
     await sleep(100);
-    await group.off(); 
+    await group.off();
     await ghost.walk(paths.jane);
     // await group.off();
     // res(0);
@@ -64,9 +64,9 @@ const states = {
       await sleep(200);
       await group.on();
     }
-    
+
     res(0);
-  }
+  },
 };
 
 export default states;
