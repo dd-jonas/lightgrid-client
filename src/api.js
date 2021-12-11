@@ -1,9 +1,11 @@
+import cors from 'cors';
 import express, { json } from 'express';
 import { JSONFile, Low } from 'lowdb';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const app = express();
+const port = 3001;
 
 // Database
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -16,12 +18,13 @@ db.data ??= { paths: [] };
 
 // Middleware
 app.use(json());
+app.use(cors());
 
 // Routes
 app.get('/api/paths', async (req, res) => {
   const { paths } = db.data;
 
-  return res.status(200).json({ paths });
+  return res.status(200).json(paths);
 });
 
 app.put('/api/paths/:pathName', async (req, res, next) => {
@@ -54,7 +57,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-app.listen(3000, () => console.info('Server listening on port 3000.'));
+app.listen(port, () => console.info(`Server listening on port ${port}.`));
 
 // Stop the server
 const closeServer = () => process.exit();
