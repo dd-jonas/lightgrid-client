@@ -15,7 +15,7 @@ GET {{baseUrl}}/lights
 GET {{baseUrl}}/lights/1
 
 ### Control a single light
-PUT {{baseUrl}}/lights/8/state
+PUT {{baseUrl}}/lights/6/state
 content-type: application/json
 
 {

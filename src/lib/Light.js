@@ -31,7 +31,7 @@ class Light {
   }
 
   static calculateBrightness(distance, options) {
-    const falloff = max(options?.falloff ?? 75, 0);
+    const falloff = max(options?.falloff ?? 100, 0);
     const maxBrightness = clamp(0, options?.maxBrightness ?? 255, 255);
 
     return max(-(maxBrightness / falloff) * distance + maxBrightness, 0);
