@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { baseUrl } from '../constants/index.js';
+import { baseUrl } from '../config/index.js';
 
 class Group {
   constructor(id) {

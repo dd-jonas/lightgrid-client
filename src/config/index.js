@@ -6,16 +6,6 @@ const baseUrl = `http://${process.env.LOCAL_ADDRESS}:80/api/8C2FF47893`;
 const ghostWalkSpeed = 5; // Steps per second
 
 const lightsData = [
-  /*{
-    id: 1,
-    name: 'Light Niels 1',
-    pos: [10, 10],
-  },
-  {
-    id: 2,
-    name: 'Light Niels 2',
-    pos: [50, 10],
-  },*/
   {
     id: 4,
     name: '1A3F CC5C',
