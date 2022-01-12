@@ -2,6 +2,7 @@
   "name": "2244-server",
   "type": "module",
   "version": "1.0.0",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.24.0",
     "cors": "^2.8.5",

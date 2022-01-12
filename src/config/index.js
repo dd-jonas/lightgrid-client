@@ -3,64 +3,60 @@ dotenv.config();
 
 const baseUrl = `http://${process.env.LOCAL_ADDRESS}:80/api/8C2FF47893`;
 
-const ghostWalkSpeed = 1; // Steps per second
-const falloff = 0.75;
-const maxBrightness = 200;
+const maxBrightness = 200; // How bright a light will be when completely on, value between 0-255
+const falloff = 100; // Distance in cm to start triggering a light
+const ghostWalkSpeed = 5; // Steps per second
 
 const lightsData = [
-  // Aap
   {
-    id: 13,
-    name: '1A3F CC5C',
-    pos: [0.3, 0],
+    id: 4,
+    name: 'chest', // 1A3F CC5C
+    pos: [30, 0],
   },
-  // Burealamp
   {
     id: 5,
-    name: '40E0 07B9',
-    pos: [0.3, 2.70],
+    name: 'desk', // 40E0 07B9
+    pos: [30, 270],
   },
-  // Wandlamp Z
   {
     id: 6,
-    name: '7965 013F',
-    pos: [1.20, .05],
+    name: 'wall-south', // 7965 013F
+    pos: [120, 3],
   },
-  // Wandlamp O
   {
     id: 7,
-    name: '3AFF 2F86',
-    pos: [2.95, 1.35],
+    name: 'wall-east', // 3AFF 2F86
+    pos: [295, 135],
   },
-  // Boekenkast lamp
   {
     id: 8,
-    name: '46EB F6A1',
-    pos: [2.70, 0.4],
+    name: 'bookcase', // 46EB F6A1
+    pos: [260, 40],
   },
-  // Vloerlamp
   {
     id: 9,
-    name: '4F0F 51B0',
-    pos: [0.1, 1.5],
+    name: 'standing', // 4F0F 51B0
+    pos: [10, 150],
   },
-  // Make-up lamp
   {
     id: 10,
-    name: '3819 F0AC',
-    pos: [2.90, 2.76],
+    name: 'makeup', // 3819 F0AC
+    pos: [290, 276],
   },
-  // TV-kast L
   {
     id: 11,
-    name: '5798 17E8',
-    pos: [1.15, 2.90],
+    name: 'tv-left', // 5798 17E8
+    pos: [115, 290],
   },
-  // TV-kast R
   {
     id: 12,
-    name: '3CCF 6B88',
-    pos: [2.15, 2.90],
+    name: 'tv-right', // 3CCF 6B88
+    pos: [215, 290],
+  },
+  {
+    id: 13,
+    name: 'ceiling', // ??
+    pos: [150, 150],
   },
 ];
 

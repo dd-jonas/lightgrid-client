@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { baseUrl, maxBrightness } from '../constants/index.js';
+import { baseUrl, maxBrightness } from '../config/index.js';
 import { sleep } from '../utils/index.js';
 
 class Group {
@@ -9,7 +9,7 @@ class Group {
   }
 
   on() {
-    return this.updateState({ on: true, bri: maxBrightness });
+    return this.updateState({ on: true, bri: 100 });
   }
 
   off() {
@@ -21,15 +21,15 @@ class Group {
   }
 
   async flicker(n) {
-    try {
-      for (let i = 0; i < n; i++) {
-        await this.updateState({ on: true, bri: maxBrightness, transitiontime: 0 });
-        await sleep(500);
-        await this.updateState({ on: true, bri: 50, transitiontime: 0 });
-        await sleep(500);
-      }
-    } catch (error) {
-      console.error(error);
+    for (let i = 0; i < n; i++) {
+      await this.updateState({
+        on: true,
+        bri: maxBrightness,
+        transitiontime: 0,
+      });
+      await sleep(250);
+      await this.updateState({ on: true, bri: 50, transitiontime: 0 });
+      await sleep(250);
     }
   }
 
