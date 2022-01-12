@@ -1,31 +1,17 @@
-import { ghost, group } from './setup.js';
+import { ghost, group, lights } from './setup.js';
 import { sleep } from './utils/index.js';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { JSONFile, Low } from 'lowdb';
+import { maxBrightness } from './constants/index.js';
 
-const paths = {
-  jane: [
-    [0, 10],
-    [33, 10],
-    [66, 30],
-    [99, 80],
-    [132, 160],
-    [165, 200],
-    [198, 240],
-    [231, 260],
-    [270, 300],
-  ],
+// Database
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const file = join(__dirname, '../db.json');
+const adapter = new JSONFile(file);
+const db = new Low(adapter);
 
-  mary: [
-    [280, 290],
-    [200, 270],
-    [180, 250],
-    [150, 230],
-    [130, 210],
-    [110, 190],
-    [60, 170],
-    [30, 150],
-    [10, 130],
-  ],
-};
+const findLight = (id) => lights.find((light) => light.id === id);
 
 const states = {
   0: async (res) => {
@@ -38,34 +24,89 @@ const states = {
     res(1);
   },
 
+  // Startfase
   10: async (res) => {
-    res(10);
-    await sleep(100);
     await group.off();
-    await ghost.walk(paths.jane);
-    // await group.off();
-    // res(0);
+    await findLight(13).setBrightness(maxBrightness); // TODO: find id of ceiling light
+    res(10);
   },
-
+  
+  // Seance John 1
   11: async (res) => {
     res(11);
-    await sleep(100);
     await group.off();
-    await ghost.walk(paths.mary);
-    // await group.off();
-    // res(0);
+    await sleep(5000);
+    await group.flicker(5);
+    await sleep(500);
+    await states[12](res);
+  },
+  
+  // Search Jane
+  12: async (res) => {
+    await group.on();
+    res(12);
+  },
+  
+  // Seance Jane
+  13: async (res) => {
+    res(13);
+
+    await db.read();
+    const { paths } = db.data;
+    const jane = paths.find(path => path.name === 'Jane');
+
+    await group.off();
+    await sleep(2000);
+    await ghost.walk(jane.points);
+
+    await states[14](res);
   },
 
-  20: async (res) => {
-    res(20);
+  // Jane waiting at the tv
+  14: async (res) => {
+    await findLight(11).setBrightness(maxBrightness);
+    res(14);
+  },
+  
+  // Search Mary
+  15: async (res) => {
     await group.on();
-    for (let i = 0; i < 3; i++) {
-      await group.off();
-      await sleep(200);
-      await group.on();
-    }
+    res(15);
+  },
+  
+  // Seance Mary
+  16: async (res) => {
+    res(16);
 
-    res(0);
+    await db.read();
+    const { paths } = db.data;
+    const mary = paths.find(path => path.name === 'Mary');
+
+    await group.off();
+    await sleep(2000);
+    await ghost.walk(mary.points);
+
+    await states[17](res);
+  },
+
+  // Mary waiting at the tv
+  17: async (res) => {
+    await findLight(11).setBrightness(maxBrightness);
+    res(17);
+  },
+
+  // ???
+  
+  // Seance John 2
+  18: async (res) => {
+    await group.on();
+    res(18);
+  },
+  
+  // Endfase
+  19: async (res) => {
+    await group.on();
+    res(19);
   },
 };
 

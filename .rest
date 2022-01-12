@@ -12,15 +12,16 @@ content-type: application/json
 GET {{baseUrl}}/lights
 
 ### Get single connected light by id
-GET {{baseUrl}}/lights/1
+GET {{baseUrl}}/lights/13
 
 ### Control a single light
-PUT {{baseUrl}}/lights/6/state
+PUT {{baseUrl}}/lights/13/state
 content-type: application/json
 
 {
     "on": true,
-    "bri": 150
+    "bri": 255,
+    
 }
 
 ### Get all groups

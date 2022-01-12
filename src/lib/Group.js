@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-import { baseUrl } from '../constants/index.js';
+import { baseUrl, maxBrightness } from '../constants/index.js';
+import { sleep } from '../utils/index.js';
 
 class Group {
   constructor(id) {
@@ -8,7 +9,7 @@ class Group {
   }
 
   on() {
-    return this.updateState({ on: true, bri: 100 });
+    return this.updateState({ on: true, bri: maxBrightness });
   }
 
   off() {
@@ -17,6 +18,19 @@ class Group {
 
   setBrightness(brightness) {
     return this.updateState({ bri: brightness, transitiontime: 0 });
+  }
+
+  async flicker(n) {
+    try {
+      for (let i = 0; i < n; i++) {
+        await this.updateState({ on: true, bri: maxBrightness, transitiontime: 0 });
+        await sleep(500);
+        await this.updateState({ on: true, bri: 50, transitiontime: 0 });
+        await sleep(500);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async updateState(state) {

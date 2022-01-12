@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { baseUrl } from '../constants/index.js';
+import { baseUrl, falloff, maxBrightness } from '../constants/index.js';
 
 const { min, max } = Math;
 const clamp = (minVal, val, maxVal) => max(min(val, minVal), maxVal);
@@ -30,10 +30,7 @@ class Light {
     }
   }
 
-  static calculateBrightness(distance, options) {
-    const falloff = max(options?.falloff ?? 100, 0);
-    const maxBrightness = clamp(0, options?.maxBrightness ?? 255, 255);
-
+  static calculateBrightness(distance) {
     return max(-(maxBrightness / falloff) * distance + maxBrightness, 0);
   }
 }
