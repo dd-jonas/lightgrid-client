@@ -3,37 +3,26 @@
 ### Get API key (open gateway in Phoscon app settings first)
 POST {{baseUrl}}
 content-type: application/json
-
 {
     "devicetype": "my application"
 }
 
+
 ### Get all connected lights
 GET {{baseUrl}}/lights
 
-### Get single connected light by id
-GET {{baseUrl}}/lights/13
 
 ### Control a single light
-PUT {{baseUrl}}/lights/13/state
+PUT {{baseUrl}}/lights/6/state
 content-type: application/json
-
 {
     "on": true,
-    "bri": 255,
-    
+    "bri": 255
 }
-
-### Get all groups
-GET {{baseUrl}}/groups
-
-### Get a single group
-GET {{baseUrl}}/groups/1
 
 ### Control a group of lights
 PUT {{baseUrl}}/groups/1/action
 content-type: application/json
-
 {
     "on": false,
 }

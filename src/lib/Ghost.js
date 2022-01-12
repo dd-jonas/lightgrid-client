@@ -1,4 +1,4 @@
-import { ghostWalkSpeed } from '../constants/index.js';
+import { ghostWalkSpeed } from '../config/index.js';
 import { bezierToPoints, sleep } from '../utils/index.js';
 
 class Ghost {

@@ -1,4 +1,4 @@
-import { lightsData } from './constants/index.js';
+import { lightsData } from './config/index.js';
 import { Ghost, Group, Light } from './lib/index.js';
 import { distance } from './utils/index.js';
 
